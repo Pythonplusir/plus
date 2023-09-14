@@ -28,9 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accountsApp',  
-    # 'courseApp',
-    # 'blogApp',
-    # 'landApp',
+    'courseApp',
+    'blogApp',
+    'landApp',
     
     'allauth',
     'allauth.account',

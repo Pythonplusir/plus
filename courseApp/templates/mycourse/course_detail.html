@@ -1,0 +1,305 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+
+<head>
+    
+    <title>{{ course.title_tag }} </title>
+   
+    <meta charset="UTF-8">
+    <meta name="description" content="{{ course.meta_desc}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/styles/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/slick-theme.css' %}">
+    <script type="text/javascript"> 
+        function disableRightClick() 
+        { 
+        alert("Sorry, right click is not allowed !!"); 
+        return false; 
+        } 
+        </script>
+
+</head>
+
+<body oncontextmenu=" return disableRightClick();">
+    <!-- <div class="btn">پلی لیست <span class="btn bg-white/[0.4] px-4 py-1 text-[11px]">17</span></div> -->
+    <div class="container mx-auto lg:px-10">
+        {% include 'mycourse/navbar.html' %}
+        
+        <div>
+           
+            
+            <div hidden style="position: sticky; top: 60px; z-index: 4; margin-bottom: 0;" class="alert alert-success" role="alert"></div>
+            <div hidden style="position: sticky; top: 60px; z-index: 4; margin-bottom: 0;" class="alert alert-danger" role="alert"></div>
+        </div>
+         
+       
+        <div id="fixed_products_slider" class="my-8">
+            <div>
+                <img src="{{ course.banner_image.url }}" class="rounded-3xl">
+            </div>
+        </div>
+        <!--title and breadcrump-->
+        <div id="product_intro">
+            <h1 class="font-[IRANSans] text-[26px]">
+                عنوان دوره
+            </h1>
+            <nav class="mt-3 w-full rounded-md">
+                <ol class="breadcrump flex">
+                    <li>
+                        <a href="">خانه</a>
+                    </li>
+                    <li>
+                        <span class="mx-2 text-neutral-500 dark:text-neutral-400">/</span>
+                    </li>
+                    <li>
+                      <h1><a href="#">{{course.title}}</a></h1>  
+                    </li>
+                    <li>
+                        <span class="mx-2 text-neutral-500 dark:text-neutral-400">/</span>
+                    </li>
+                    {% for section in section %}
+                    {% for lecture in lecture %}{% if lecture.section == section %}
+                    <li class="text-neutral-500 dark:text-neutral-400">
+                       <h2><span>{{ course.headlin }}</span></h2> 
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+                                       
+                   
+                   
+                </ol>
+            </nav>
+        </div>
+        <!--content-->
+        <div id="product_content" class="mt-10">
+            <div class="flex flex-col md:flex-row md:justify-between">
+                <section class="order-2 md:order-1 md:w-[68%]">
+                    <article
+                        class="p-6 shadow-[0_0_9px_0_rgba(0,0,0,0.1)] rounded-lg overflow-hidden font-[IRANSans] leading-[3.3]">
+                        <p>
+                            <img src="{{course.image.url}}" alt="">
+                        </p>
+                     
+                            <P>
+                            {{ course.desc_one | truncatechars:100}}
+                          </p>
+                    </article>
+                    <!--videos-->
+                    <div id="videos_list" class="mt-10">
+                        <h3 class="font-[IRANYekan] font-bold text-xl mb-4">فهرست ویدئوها</h3>
+                        {% for section in section %}
+                            {% for lecture in lecture %}{% if lecture.section == section %}
+                        <div class="video-list accordion">
+                           
+                            <div class="item p-5 bg-gray-50 transition-colors hover:bg-white cursor-pointer rounded-3xl shadow-xl">
+                                <div class="flex justify-between">
+                                    <div class="flex items-center font-[IRANYekan]">
+                                        <div
+                                            class="w-[40px] h-[40px] bg-blue-400 rounded-full leading-[2.9] text-center">
+                                            <i class="fa fa-play text-white rotate-180"></i>
+                                        </div>
+                                        <div class="flex flex-col mr-3">
+                                            <div>{{ section.title }}</div>
+                                            <div class="text-gray-500 text-[11px]"></div>
+                                            <div class="">{{ lecture.title }}</div>
+                                           
+                                           
+                                         
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="w-[40px] h-[40px] bg-blue-400 rounded-full pt-2 text-center">
+                                        <i class="fa fa-unlock text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="hide hidden mt-4 text-sm text-gray-600">
+                                  <video width="320" height="240" controls controlsList="nodownload" class="download" value="Download" name="actionType" oncontextmenu="return false;">
+                                         
+                                            <source src="{{lecture.video.url}}" type="video/mp4" controlsList="nodownload"></source>
+                                             
+                                    </video>
+                                </div>
+                           
+                            
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        
+                        {% endfor %}
+                    </div>
+                    <!--related category-->
+                    <section id="single_cat" class="mt-10">
+                        <h3 class="font-[IRANYekan] font-bold text-xl mb-4">سایر دوره های مرتبط</h3>
+                        <div class="single-cat flex">
+                            {% for course in similar_course %}
+                            <div class="item bg-blue-400">
+                                <div class="thumbnail">
+                                    <a href="{% url 'course:course_detail' course.course_slug  %}">
+                                    <img src="{{ course.image.url }}">
+                                    </a>
+                                </div>
+                               
+                            </div>
+                            {% endfor %}
+                            
+                        </div>
+                    </section>
+                </section>
+                <aside class="order-1 md:order-2 mb-4 md:mb-0 md:w-[30%]">
+                    <!--info-->
+                    <div class="p-6 shadow-[0_0_9px_0_rgba(0,0,0,0.1)] rounded-lg overflow-hidden font-[IRANYekan]">
+                        <div class="flex items-center">
+                            <div class="fa fa-dollar text-gray-400 ml-3"></div>
+                            <div class="font-[IRANSans]">
+                                قیمت این دوره : <b class="text-[23px]">{{ course.price }} <span
+                                        class="text-[10px]">تومان</span></b>
+                            </div>
+                        </div>
+                        <div class="flex items-center mt-3">
+                            <div class="fa fa-user text-gray-400 ml-3"></div>
+                            <div class="font-[IRANSans] text-[14px]">
+                                مدرس : <span>مهدی آزادی</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center mt-3">
+                            <div class="fa fa-clock-o text-gray-400 ml-3"></div>
+                            <div class="font-[IRANSans] text-[14px]">
+                                مدت زمان : <span>12 ساعت</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center mt-3">
+                            <div class="fa fa-video-camera text-gray-400 ml-3"></div>
+                            <div class="font-[IRANSans] text-[14px]">
+                                تعداد ویدئو : <span>{{ lecture.count }}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center mt-3">
+                            <div class="fa fa-calendar text-gray-400 ml-3"></div>
+                            <div class="font-[IRANSans] text-[14px]">
+                                آخرین بروزرسانی : <span>2 اردیبهشت 1402</span>
+                            </div>
+                        </div>
+                        <div class="mt-5">
+                           
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+  
+    <footer id="footer" class="mt-12 p-4 bg-slate-400">
+        <div class="flex flex-wrap justify-between">
+            <div class="item">
+                <h5 class="title">منوی اول</h5>
+                <div class="content">
+                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است،
+                    چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
+                </div>
+            </div>
+            <div class="item">
+                <h5 class="title">منوی اول</h5>
+                <div class="content">
+                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است،
+                    چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
+                </div>
+            </div>
+            <div class="item">
+                <h5 class="title">منوی اول</h5>
+                <div class="content">
+                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است،
+                    چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
+                </div>
+            </div>
+            <div class="item">
+                <h5 class="title">ما در شبکه های اجتماعی</h5>
+                <div class="content h-full">
+                    <ul class="h-full flex justify-center items-center text-lg leading-10">
+                        <li class="ml-1">
+                            <a href="#" class="block w-[35px] h-[35px] text-center text-white bg-slate-500 rounded-full">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        </li>
+                        <li class="ml-1">
+                            <a href="#" class="block w-[35px] h-[35px] text-center text-white bg-blue-600 rounded-full">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="ml-1">
+                            <a href="#" class="block w-[35px] h-[35px] text-center text-white bg-purple-500 rounded-full">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li class="ml-1">
+                            <a href="#" class="block w-[35px] h-[35px] text-center text-white bg-blue-400 rounded-full">
+                                <i class="fa fa-telegram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="block w-[35px] h-[35px] text-center text-white bg-red-500 rounded-full">
+                                <i class="fa fa-youtube-play"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr class="mt-10">
+        <p class="font-[IRANSans] text-[12px] text-white text-center pt-2">تمام حقوق این وبسایت محفوظ می باشد.</p>
+    </footer>
+
+    
+    
+    <script src="{% static 'js/cart/jquery-3.6.0.min.js' %}"></script>
+    <!-- popper.js File -->
+    <script src="{% static 'js/cart/popper.min.js' %}"></script>
+    <!-- bootstrap.js File -->
+    <script src="{% static 'js/cart/bootstrap.min.js' %}"></script>
+    <!-- main.js File -->
+    <script src="{% static 'js/cart/main.js' %}"></script>
+
+    <script src="{% static 'assets/scripts/jquery-3.6.3.min.js' %}"></script>
+    <script src="{% static 'assets/scripts/custom.js' %}"></script>
+    <script src="{% static 'assets/scripts/slick.min.js' %}"></script>
+    <script>
+        noContext = document.getElementById('noContextMenu');
+
+        noContext.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        });
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+            $('#products_slider').slick({
+                rtl: true,
+                dots: false,
+                autoplay: true,
+                autoplaySpeed: 4000,
+                arrows: false
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // messages timeout for 10 sec 
+            setTimeout(function() {
+                $('.message').fadeOut('slow');
+            }, 6000); // <-- time in milliseconds, 1000 =  1 sec
+    
+            // delete message
+            $('.del-msg').live('click',function(){
+                $('.del-msg').parent().attr('style', 'display:none;');
+            })
+        });
+    </script>
+    
+    <div id="overlay" class="w-full h-full fixed top-0 left-0 z-10 bg-black/40 hidden"></div>
+</body>
+
+</html>

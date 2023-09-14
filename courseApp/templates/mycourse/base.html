@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="پایتون پلاس">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/styles/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/slick-theme.css' %}">
+   
+    <script>
+        noContext = document.getElementById('noContextMenu');
+
+        noContext.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        });
+    </script>
+</head>
+<body>
+    <!-- <div class="btn">پلی لیست <span class="btn bg-white/[0.4] px-4 py-1 text-[11px]">17</span></div> -->
+    <div class="container px-2 md:px-0 mx-auto lg:px-10">
+       
+        {% include 'mycourse/navbar.html' %}
+         <!--slider-->
+         <div id="products_slider" class="my-8">
+            <!-- <div>
+                <img src="{% static 'assets/images/slider/1.jpg' %}" class="rounded-3xl">
+            </div> -->
+            <div>
+                <img src="{% static 'assets/images/slider/2.jpg' %}" class="rounded-3xl">
+            </div>
+        </div>
+                          
+
+        {% block course %}
+        
+        {% endblock course %}
+
+
+        
+    </div>
+
+    {% include 'mycourse/footer.html' %}
+
+    <script src="{% static 'js/vanila.js' %}"></script>
+    
+   
+
+   
+
+    <script src="{% static 'assets/scripts/jquery-3.6.3.min.js' %}"></script>
+    <script src="{% static 'assets/scripts/custom.js' %}"></script>
+    <script src="{% static 'assets/scripts/slick.min.js' %}"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $('#products_slider').slick({
+                rtl: true,
+                dots: false,
+                autoplay: true,
+                autoplaySpeed: 4000,
+                arrows: false
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // messages timeout for 10 sec 
+            setTimeout(function() {
+                $('.message').fadeOut('slow');
+            }, 9000); // <-- time in milliseconds, 1000 =  1 sec
+    
+            // delete message
+            $('.del-msg').live('click',function(){
+                $('.del-msg').parent().attr('style', 'display:none;');
+            })
+        });
+    </script>
+
+
+    <div id="overlay" class="w-full h-full fixed top-0 left-0 z-10 bg-black/40 hidden"></div>
+</body>
+
+</html>

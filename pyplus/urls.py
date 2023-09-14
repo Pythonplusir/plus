@@ -10,11 +10,10 @@ urlpatterns = [
   
   path('accounts/', include('allauth.urls')), 
   path('account/', include('accountsApp.urls', namespace="askes")),
-#   path('', include('courseApp.urls', namespace="course")),
-#   path('specializations/django/', include('landApp.urls', namespace="land")), 
-  
-#   path('article/', include('blogApp.urls', namespace="blog")),   
-#   path('admin/', admin.site.urls),
+  path('', include('courseApp.urls', namespace="course")),
+  path('specializations/django/', include('landApp.urls', namespace="land")),  
+  path('article/', include('blogApp.urls', namespace="blog")),   
+  path('admin/', admin.site.urls),
   
 ]
 if settings.DEBUG:

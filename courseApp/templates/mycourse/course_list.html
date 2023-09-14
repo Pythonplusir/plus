@@ -1,0 +1,37 @@
+{% extends 'mycourse/base.html' %}
+
+{% block title %}منبع آموزش زپایتونبان {% endblock title %}
+
+
+
+
+          
+
+            {% block course %}
+
+            <section id="articles" class="mt-10">
+                <div class="flex justify-between items-center mb-4 bg-gray-50 px-4 py-2 rounded-full">
+                    <h3 class="font-[IRANYekan] font-bold text-xl">دوره های رایگان</h3>
+                    
+                </div>
+                <div class="articles">
+                    {% for myc in course %}
+                    <div class="item">
+                        <a href="{{ myc.get_absolute_url }}">
+                        <div class="thumbnail">
+                            <img src="{{ myc.image.url }}">
+                        </div>
+                       
+                        </a>
+                       
+                    </div>
+                    {% endfor %}
+                    
+                   
+                </div>
+            </section>
+            {% endblock course %}
+
+
+
+

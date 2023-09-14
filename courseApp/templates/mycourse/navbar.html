@@ -1,0 +1,72 @@
+{% load static %}
+<header class="mt-8">
+    <div class="flex justify-between">
+        <div class="right-side">
+            <div class="flex justify-start items-center content-center">
+                <div class="menu-btn ml-5 md:hidden">
+                    <i class="fa fa-bars text-[30px]"></i>
+                </div>
+                <a href="/">
+                   
+                    <img class="bg-no-repeat w-38 h-10" src="{% static 'assets/images/plus.jpg' %}" width="50px" alt="پایتون پلاس">
+                </a>
+                <div class="navigation md:mr-12">
+                    <ul
+                        class="flex justify-start flex-wrap content-start md:content-center h-full nav-links fixed md:static bg-white md:bg-none w-[240px] md:w-auto top-0 right-[-100%] z-20 flex-col md:flex-row p-4 md:p-0">
+
+                        <a href="">
+                            <li>  همه دوره ها </li>
+                        </a>
+
+
+                        <a href="{% url 'blog:post_list' %}">
+                            <li> مقاله ها </li>
+                        </a>
+                        <a href="">
+                            <li>درباره ما</li>
+                        </a>
+                      
+                        <a href="{% url 'land:landing' %}">
+                           <li>مسیر یادگیری جنگو </li>
+                        </a>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="left-side">
+            <div class="flex justify-end content-center">
+              
+                <div id="auth" class="font-[IRANYekan] text-sm text-center flex">
+                    <div class="w-[40px] h-[40px] bg-yellow-400 rounded-xl ml-4 text-center leading-[3.3] md:hidden">
+                        {% if user.is_authenticated %}
+                         <a href="{% url 'askes:myprofile' user.id user.email  %}"><div class="w-[90px] py-[10px] bg-yellow-400 rounded-xl ml-3 hidden md:block">پروفایل</div>
+                        <i class="fa fa-user text-[18px]">
+                           
+                        </i>
+                         </a>
+                    {% else %}
+                    <a href="/accounts/login/"><div class="w-[90px] py-[10px] bg-yellow-400 rounded-xl ml-3 hidden md:block">عضویت</div>
+                    <i class="fa fa-user text-[18px]">
+
+                        
+                    </i>
+                    </a>
+                    {% endif %}
+                    </div>
+                    {% if user.is_authenticated %}
+                  
+                    <a href="{% url 'askes:myprofile' user.id user.email  %}"><div class="w-[90px] py-[10px] bg-yellow-400 rounded-xl ml-3 hidden md:block">پروفایل</div></a>
+                    <a  href="/accounts/logout/"><div class="w-[90px] py-[10px] bg-yellow-400 rounded-xl ml-3 hidden md:block"> خروج</div></a>
+                     {% else %}
+                     <a href="/accounts/login/"><div class="w-[90px] py-[10px] bg-yellow-400 rounded-xl ml-3 hidden md:block">ورود</div></a>
+                    {% endif %}
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
