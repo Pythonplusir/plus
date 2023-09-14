@@ -1,0 +1,180 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Bootstrap Checkout</title>
+
+    <link rel="stylesheet" href="{% static 'check/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'check/bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'check/css/main.css' %}">
+
+    <script type="text/javascript" src="{% static 'check/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'check/js/engine.js' %}"></script>
+    <script type="text/javascript" src="{% static 'check/bootstrap/js/bootstrap.js' %}"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap&subset=cyrillic" rel="stylesheet">
+</head>
+<body style="direction: rtl;">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img class="bg-no-repeat w-20 bg-secondary" src="{% static 'assets/images/plus.jpg' %}" width="40" alt="پایتون پلاس">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">همه دوره ها <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">بلاگ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">ارتباط با مدرس</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'askes:ask' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" fill="currentColor" class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
+              </svg> سوال بپرس
+       </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          لینک ها ضروری
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            {% if user.is_authenticated %}
+            <a href="{% url 'askes:notification' %}"> 
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="16" fill="currentColor" class="bi bi-bell text-warning" viewBox="0 0 16 16">
+                  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                </svg>
+          </a>
+            <a class="dropdown-item" href="{% url 'account_logout' %}">خروج</a>
+            {% else %}
+            <a class="dropdown-item" href="{% url 'account_login' %}">ورود</a>
+           {% endif %}
+            
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+<main class="container text-right my-3">
+    <section class="row mx-0 mb-5">
+        <div class="col-lg-8 px-0 custom-margin">
+            
+                <div class="p-4 border rounded mb-5" style="direction: rtl;">
+                    <div class="row mx-0 d-block tex-right">
+                        <span class="badge badge-secondary"
+                              style="font-size: 16px;
+                              padding: 10px 13px;
+                              background: #221E8A;"></span>
+                        <span class="font-weight-bold  ml-3 font-size-18" style="text-align: right;">اطلاعات زیر را  تکمیل کنید</span>
+                    </div>
+                    <div class="row mx-0 mt-3 tex-right">
+                       
+                        
+                    </div>
+                    <form method="post" style="text-align: right;">
+                      {% csrf_token %}
+                     
+                      <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                            {{form.user_name|as_crispy_field}}
+                        </div>
+
+                        <div class="form-group col-md-4 mb-0">
+                            {{form.phone|as_crispy_field}}
+                        </div>
+                      </div>
+                      
+                        
+                      
+                      {{ form.is_apply|as_crispy_field }}
+
+                     <input class="btn btn-info" type="submit" name="" id="" value="ثبت و ادامه">
+                    </form>
+                  
+                    
+                    <hr class="my-4" style="border-style: dotted;">
+                    
+                    <!-- <div class="row mx-0 mt-3">
+                        <div class="input-group mt-2">
+                            <div class="input-group-append w-100" style="height: 54px;">
+                                <button type="button" class="d-flex justify-content-center align-items-center p-1 border btn btn btn-light flex-grow-1 w-100 rounded-left" autofocus>
+                                    <img alt="masterCard" src="{% static 'check/images/masterCard.png' %}" class="mw-100">
+                                    <img alt="visa" src="{% static 'check/images/masterCard.png' %}" class="mw-100">
+                                </button>
+                                <button type="button" class="p-1 border btn btn btn-light flex-grow-1 w-100">
+                                    <img alt="wireTransfer_logo" src="{% static 'check/images/wireTransfer_logo.png' %}" class="mw-100">
+                                </button>
+                                <button type="button" class="p-1 border btn btn btn-light flex-grow-1 w-100">
+                                    <img alt="qiwi" src="{% static 'check/images/masterCard.png' %}" class="mw-100">
+                                </button>
+                                <button type="button" class="p-1 border btn btn btn-light flex-grow-1 w-100">
+                                    <img alt="yandexMoney" src="{% static 'check/images/masterCard.png' %}" class="mw-100">
+                                </button>
+                                <button type="button" class="p-1 border btn btn btn-light flex-grow-1 w-100">
+                                    <img alt="webMoney" src="{% static 'check/images/masterCard.png' %}" class="mw-100">
+                                </button>
+                                <button type="button" class="p-1 border btn btn btn-light flex-grow-1 w-100">
+                                    <img alt="payPal" src="{% static 'check/images/masterCard.png' %}" class="mw-100">
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+
+
+                </div>
+                
+           
+        </div>
+        <div class="col-lg px-0">
+            <div class="p-4 border border-bottom-0 rounded" style="background: bottom / cover no-repeat url('assets/images/Subtract.png');">
+                <div>
+                    <h5 class="font-weight-bold">فاکتور</h5>
+                </div>
+               
+               
+                <hr class="my-4" style="border-style: dotted;">
+                <div class="mb-5">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="text-body font-weight-bold">جمع</h5>
+                        <h3 class="color-primary font-weight-bold">20000 تومان</h3>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="text-body"></h6>
+                        <h5 class="color-secondary font-weight-bold"></h5>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p class="m-0" style="font-size: 14px;"></p>
+                            <p class="m-0 color-common" style="font-size: 13px;"></b></p>
+                        </div>
+                        <div class="color-primary font-weight-bold d-flex justify-content-center align-items-center">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer></footer>
+
+</body>
+</html>

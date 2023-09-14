@@ -32,9 +32,9 @@ INSTALLED_APPS = [
     # 'blogApp',
     # 'landApp',
     
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',   
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',   
     
 
     'django_jalali', 
