@@ -64,6 +64,7 @@ def order_create(request):
 def to_bank(request):
     order_id = request.session.get("order_id")
     order = get_object_or_404(Order, id=order_id)
+    
     amount  =200000       
    
     client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
@@ -74,6 +75,10 @@ def to_bank(request):
     description = 'Test'
     merchant = '***********************'
     result = client.service.PaymentRequest(merchant, amount, description, email, mobile, callbackUrl)
+    print(user)
+    print(email)
+    print(mobile)
+    
 
     if result.Status == 100 and len(result.Authority) == 36:
         Invoice.objects.crate(order = order ,

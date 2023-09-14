@@ -57,7 +57,7 @@
             <div class="font-[IRANYekan] font-bold text-xs" style="padding-right: 10px;">  لطفا فرم زیر را بدرستی پر کنید </div><br>
             <div class="flex items-center" style="padding-right: 10px;">
                 
-                <form action="" method="post" style="line-height: 40px;">
+                <form action="{% url 'askes:order_create' %}" method="post" style="line-height: 40px;">
                     {% csrf_token %}
                     <div class="mr-3">
                     <label  class="font-[IRANYekan] font-bold text-xs" for="user_name" style="padding:20px;">نام و نام خانوادگی </label>
