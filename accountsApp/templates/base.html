@@ -1,15 +1,18 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa-IR" dir="rtl">
 <title>{% block head_title %}{% endblock %}</title>
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/user_registration_bs4.css' %}">
+   
 <style>
     body{
+        direction: rtl;
         background-color:#D5DBDB;
+        line-height: 20px;
+        max-width: max-content;
         font-size: large;
         max-width: 100%;
     }
@@ -22,7 +25,7 @@
 
 {% block content %}{% endblock %}
 
-{% include 'footer.html' %}
+
 
 
 </body>

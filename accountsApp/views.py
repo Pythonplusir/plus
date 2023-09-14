@@ -1,10 +1,11 @@
 from django.views import generic, View
+from django.urls import reverse
 from django.core.mail import send_mail, send_mass_mail
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse ,HttpResponseRedirect
 from.forms import OrderForm
 from .models import Order
 from .models import Invoice
@@ -55,12 +56,12 @@ def order_create(request):
     else:
         form = OrderForm()
     return render(request,
-                  'order_created.html',
+                  'order.html',
                   {'form': form})
 
 
 
-def to_bank(request , order_id):
+def to_bank(request):
     order_id = request.session.get("order_id")
     order = get_object_or_404(Order, id=order_id)
     amount  =200000       

@@ -11,7 +11,7 @@
 
 
 </style>
-<div class="container-padding">
+<div class="container-padding-fluid text-right" style="direction: rtl;">
     <div class="row">
 
         <div class="col col-8  mx-auto">
@@ -50,7 +50,7 @@
                         <div class="col-lg-6">
 
 
-                            <form class="login" method="POST" action="{% url 'account_login' %}">
+                            <form class="login" method="POST" action="{% url 'account_login' %}" style="line-height: 10px;">
                                 {% csrf_token %}
                                 {% bootstrap_form form %}
                                 {% if redirect_field_value %}

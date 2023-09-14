@@ -1,0 +1,123 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="پایتون پلاس">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/styles/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/slick-theme.css' %}">
+   
+    
+</head>
+
+<body>
+    <!-- <div class="btn">پلی لیست <span class="btn bg-white/[0.4] px-4 py-1 text-[11px]">17</span></div> -->
+    <div class="container mx-auto lg:px-10">
+        {% include 'mycourse/navbar.html' %}
+        <div class="py-8">
+            <div>
+                <h2 class="font-[IRANYekan] text-2xl font-semibold leading-tight">سبد خرید</h2>
+            </div>
+            <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                    <table class="min-w-full leading-normal">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-sm font-[IRANYekan] font-semibold text-gray-600">
+                                    عنوان محصول
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-sm font-[IRANYekan] font-semibold text-gray-600">
+                                    قیمت
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <a href="#" target="_blank" class="font-[IRANSans]">
+                                        دوره آموزشی جنگو
+                                    </a>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white font-[IRANSans] text-sm">
+                                    <p class="text-gray-900 whitespace-no-wrap text-center">500,000 تومان</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--offer-->
+            <div class="font-[IRANYekan] font-bold text-xs" style="padding-right: 10px;">  لطفا فرم زیر را بدرستی پر کنید </div><br>
+            <div class="flex items-center" style="padding-right: 10px;">
+                
+                <form action="" method="post" style="line-height: 40px;">
+                    {% csrf_token %}
+                    <div class="mr-3">
+                    <label  class="font-[IRANYekan] font-bold text-xs" for="user_name" style="padding:20px;">نام و نام خانوادگی </label>
+                    
+                        <input type="text" name="user_name" id="user_name"  class="border border-gray-200 hover:border-gray-300 outline-none text-left p-2 text-sm" value="{{ user_name}}" required>
+                        <label  class="font-[IRANYekan] font-bold text-xs" for="phone" style="padding:20px;">شماره همراه معتبر</label>
+
+                            <input type="text" name="phone" id="phone"  class="border border-gray-200 hover:border-gray-300 outline-none text-left p-2 text-sm" value="{{ phone}}" required>
+                          
+                        
+    
+                        <label  class="font-[IRANYekan] font-bold text-xs" for="is_apply" style="padding:20px;"> شرایط را قبول دارم</label>
+                       
+                        <input type="checkbox" name="is_apply" id="is_apply" required>
+                      
+    
+                        <div class="mt-8 flex justify-end">
+                            <button type="submit"  class="px-4 py-2 font-[IRANYekan] font-medium text-center text-white bg-green-500 rounded-md">ثبت و ادامه پرداخت</button>
+                        </div>
+                    </div>
+
+                    
+                </form>
+                
+
+                
+            </div>
+            <!--total price-->
+            <div class="mt-8">
+                <h4 class="font-[IRANYekan] text-lg text-gray-800 leading-tight">مجموع سبد خرید</h4>
+                <div class="mt-5">
+                    <div class="flex font-[IRANSans]">
+                        <div class="font-bold">دوره ها : </div>
+                        <div class="mr-3">237,000 تومان</div>
+                    </div>
+                    <div class="flex font-[IRANSans]">
+                        <div class="font-bold">مجموع : </div>
+                        <div class="mr-3">250,000 تومان</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    {% include 'mycourse/footer.html' %}
+    <script src="{% static 'assets/scripts/jquery-3.6.3.min.js' %}"></script>
+    <script src="{% static 'assets/scripts/custom.js' %}"></script>
+    <script src="{% static 'assets/scripts/slick.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#products_slider').slick({
+                rtl: true,
+                dots: false,
+                autoplay: true,
+                autoplaySpeed: 4000,
+                arrows: false
+            });
+        });
+    </script>
+    <div id="overlay" class="w-full h-full fixed top-0 left-0 z-10 bg-black/40 hidden"></div>
+</body>
+
+</html>
